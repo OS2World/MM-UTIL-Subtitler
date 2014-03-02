@@ -60,31 +60,38 @@ var UniName:pUniString;
     outbytesleft:size_t;
     rc:longint;
     ps:pointer;
+    TempS:AnsiString;
     pus:pUniString;
 begin
-  result:=s;
+  temps:=s; // Use local variable instead of parameter!
+            // Unicode api seems to change the parameter even if it is
+            // passed as value, not address! (might be AnsiString problem?)
+  if length(s)>0 then
+    TempS[1]:=s[1]; // Make sure it will be allocated, not just address-copied!
+
+  result:=TempS;
 
   if not Convert_Initialized then exit;
 
-  getmem(UniName,sizeof(UniChar)*(length(s)+1));
+  getmem(UniName,sizeof(UniChar)*(length(TempS)+1));
   if UniName=Nil then exit; // *** Not enough memory to create temporary Unicode string!
 
-  inbytesleft:=length(s)+1;
+  inbytesleft:=length(TempS)+1;
   UniCharsLeft:=inBytesLeft;
   Nonidentical:=0;
-  ps:=@s[1];       // The function will change the addresses, so use a local variable!
+  ps:=@TempS[1];   // The function will change the addresses, so use a local variable!
   pus:=UniName;
   rc:=UniUconvToUcs(ToUC,ps,inBytesLeft,pus,UniCharsLeft,nonidentical);
   if rc=0 then
   begin
     // now back from unicode to actual codepage
-    outbytesleft:=length(s);
+    outbytesleft:=length(TempS);
     UniCharsLeft:=UniStringLength(UniName);
     Nonidentical:=0;
-    ps:=@s[1];
+    ps:=@TempS[1];
     pus:=UniName;
     rc:=UniUconvFromUcs(FromUC,pus,UniCharsLeft,ps,OutBytesLeft,nonidentical);
-    if rc=0 then result:=s;
+    if rc=0 then result:=TempS;
   end;
   freemem(UniName);
 end;

@@ -2,3 +2,12 @@
 #define DID_TEXTFIELD               1001
 #define DID_EXITBUTTON              1002
 #define DID_INFOFIELD               1004
+#define DID_SETUPBUTTON             1003
+#define DID_SETUPWINDOW             100
+#define DID_DONEBUTTON              101
+#define DID_FILENAMEENTRY           103
+#define DID_FPSENTRY                105
+#define DID_CODEPAGEENTRY           107
+#define DID_LOADBUTTON              108
+#define DID_FPSUSEDENTRY            111
+#define DID_SAVEBUTTON              112

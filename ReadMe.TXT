@@ -1,37 +1,98 @@
 
-                               S u b t i t l e r
-                               -----------------
+                            S u b t i t l e r  v1.2
+                            -----------------------
 
 
 Description:
 
   This is an application that shows subtitles for AVI files (usually SUB files)
-  while they are being played with WarpMedia or WarpVision. It currently knows
-  three kind of subtitle files, if you are lucky, yours is also supported.:)
+  while they are being played with WarpMedia or WarpVision CLI/GUI. It knows
+  three kind of subtitle files currently, if you are lucky, yours is also 
+  supported.:)
 
 
-Usage:
+Usage (short):
 
-  SUBTITLER <SubFileName> [FramePerSec]
+  The easiest way of using the application is to start it, and set the SUB file
+  and the FPS in the Settings window, available by pressing the Setup button.
 
-  Parameter one has to be the name (and path) of the file containing the 
-  subtitles. Parameter two is optional, it is 25 by default. If the subtitle
-  file contains Frame numbers instead of time information (numbers in curved
-  brackets), you have the use this to provide the FPS of the AVI file. It is
-  a real number, it's not a must to be an integer.
+  You can also provide these by command line parameters:
 
-  If your subtitle file contains national characters, make sure that you set
-  the codepage of the subtitle file in the translat.ini file (it's a plain
-  text file).
+  SUBTITLER [SubFileName [FramePerSec]]
 
-  If you plan to use it with WarpMedia, you don't have to do anything else.
+  In this case, the first parameter has to be the name (and path) of the file 
+  containing the subtitles. If a second parameter is given, it will be treated
+  as the FPS of the film. It is 25 by default.
 
-  If you plan to use it with WarpVision, you will have to use another program
-  too, called PipeExec. It sends every output of WarpVision into a Pipe, making
-  it possible for Subtitler to track the position of the movie. You should
-  start WarpVision like this:
-  
-  PipeExec WarpVision.EXE D:\Path\Movie.AVI
+  When Subtitler is started, you can start your favourite media player appli-
+  cation to see films with subtitles.
+
+
+Getting started (long usage):
+
+  - 1st step: Configuring Subtitler for general usage
+
+    After starting Subtitler, you should set its position and size to what you
+    would like for it. Then you can open the Font Palette and the Color Palette
+    (they are in the System Setup folder), and drag-and-drop your preferred
+    font (a big enough font size is recommended, like 20 or bigger) from the
+    Font Palette, and your preferred background and font color from the Color
+    Palette (use simple drag and drop for background color, and Ctrl+Drag and
+    drop for fint color changing).
+    Subtitler will remember these settings next time you start it.
+
+  - 2nd step: Loading subtitle file
+
+    Press the Setup button, so the Settings window will appear. You can load
+    files containing subtitles in this window, by pressing the Load button.
+
+    For subtitles with national characters, Subtitler has to know the codepage
+    in which the subtitle-file has been saved. If it was saved in a Windoze
+    environment, it might be necessary to set a Windoze codepage, like 1250 or
+    1252 (for Eastern European countries). 
+    It has to be set in the 'Codepage of subtitles' entry.
+
+    Another thing you might need to set is the Frame/Sec (FPS) of the film.
+    There is one kind of subtitle-file format, which contains frame information,
+    and not time information for subtitles. In other words, it contains that
+    for example a specified text should be shown between the 3150. and the 3310.
+    frame (picture/image) of the film. For this kind of subtitle files, 
+    Subtitler has to convert frame number to time, and for this, it has to know
+    the FPS of the film.
+
+    Subtitler will show if it needs the FPS for this subtitle file in the
+    'In use now' entry. If 'Yes' is written there, you have to provide the FPS.
+    (WarpVision CLI writes the FPS constant to the screen when started. For
+    WarpVision GUI and WarpMedia, you might check the Playlist for this infor-
+    mation. In the last case, you can guess it. ;) It is usually 23.98. )
+
+    When all is done, you can save your FPS and Codepage settings by pressing
+    the Save settings button. It will create a Stitler.ini file next to the
+    Subtitler executable. It is a editable text file.
+
+    Press the Done button to go back to the main window.
+
+    You can change these settings anytime, even while playing a subtitle. The
+    changes will take effect when you press the Done button.
+
+  - 3rd step: Starting a media-player application
+
+    Subtitler can co-operate with the following media-player applications:
+     - WarpMedia
+     - WarpVision CLI (Text-mode version, v0.0.13 is tested to work)
+     - WarpVision GUI (Graphical version, builds after 2002.05.28.)
+
+    Subtitler has to get film-position information from these applications.
+    There is no problem with WarpMedia and WarpVision GUI, they automatically
+    send these informations, when the film is started. So, there is nothing
+    special to do with them, use them as you use them regulary.
+
+    With WarpVision CLI, you have to use an additional program, called PipeExec
+    (available in this package). It sends the output of WarpVision CLI to
+    Subtitler, so the actual position can be got. So, in this case, you have
+    to start WarpVision CLI in this way:
+
+    PipeExec wvision.exe <parameters>
 
 
 Sources/Compilation:
@@ -67,6 +128,7 @@ Changing the sources:
   edit the dialog.res file. It will also modify the dialog.dlg and dialog.h
   files. Run R.CMD to reflect the changes to pascal.
 
+
 Contact information:
 
   I don't plan to do changes to this program, anyway, the sourcecode is open,
@@ -77,3 +139,21 @@ Contact information:
   Doodle <kocsisp@dragon.klte.hu>
 
 
+Thankyous:
+
+  Thanks to Vlad Stelmahovsky (author of WarpVision GUI) for implementing the
+  named pipe position-output, so Subtitler can be used with WVGUI until they
+  implement native subtitle support!
+
+
+History:
+
+  v1.0: Initial release
+  v1.2: Support for changing codepage, FPS and SUB-file on the fly
+        Added support for Stitler.ini file, so settings can be saved,
+          translat.ini is not used anymore
+        Minor Unicode conversion fix
+        WarpVision GUI support
+
+
+<End of ReadMe.TXT>

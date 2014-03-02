@@ -2,3 +2,12 @@
   DID_TEXTFIELD                         = 1001;
   DID_EXITBUTTON                        = 1002;
   DID_INFOFIELD                         = 1004;
+  DID_SETUPBUTTON                       = 1003;
+  DID_SETUPWINDOW                       = 100;
+  DID_DONEBUTTON                        = 101;
+  DID_FILENAMEENTRY                     = 103;
+  DID_FPSENTRY                          = 105;
+  DID_CODEPAGEENTRY                     = 107;
+  DID_LOADBUTTON                        = 108;
+  DID_FPSUSEDENTRY                      = 111;
+  DID_SAVEBUTTON                        = 112;
