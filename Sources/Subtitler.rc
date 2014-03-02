@@ -1,0 +1,17 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+#include "dialog.h"
+
+DLGTEMPLATE DID_MAINWINDOW LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Dialog Title", DID_MAINWINDOW, 0, 0, 239, 37, NOT FS_DLGBORDER | 
+            FS_MOUSEALIGN | FS_SIZEBORDER | WS_VISIBLE, FCF_NOBYTEALIGN
+    BEGIN
+        CTEXT           "Subtitler v1.0 by Doodle", DID_TEXTFIELD, 0, 12, 
+                        239, 25, DT_WORDBREAK
+        PUSHBUTTON      "Exit", DID_EXITBUTTON, 215, 0, 24, 10
+        CTEXT           "Info field", DID_INFOFIELD, 29, 0, 181, 10, 
+                        DT_VCENTER
+    END
+END
